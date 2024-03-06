@@ -36,7 +36,7 @@ public class CouponController {
       operationId = "maximizeCoupon",
       summary =
           "Maximize the use of a coupon so the client can buy the largest possible quantity of products.")
-  @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK")})
+  @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK.")})
   @PostMapping({"coupon"})
   ResponseEntity<MaximizedTotalToSpendDto> maximizeCouponBenefit(
       @RequestBody @Valid FavouritesClientItemsWithCouponDto request) throws BusinessException {
