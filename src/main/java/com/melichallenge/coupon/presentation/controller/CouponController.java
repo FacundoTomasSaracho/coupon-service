@@ -1,6 +1,6 @@
 package com.melichallenge.coupon.presentation.controller;
 
-import com.melichallenge.coupon.business.service.BestSellingService;
+import com.melichallenge.coupon.business.service.BestSellingItemsService;
 import com.melichallenge.coupon.business.service.MaximizeCouponUseService;
 import com.melichallenge.coupon.exception.BusinessException;
 import com.melichallenge.coupon.model.BestRedeemedProducts;
@@ -30,33 +30,45 @@ import org.springframework.web.bind.annotation.RestController;
 public class CouponController {
 
   private final MaximizeCouponUseService maximizeCouponUseService;
-  private final BestSellingService bestSellingService;
+  private final BestSellingItemsService bestSellingService;
 
   @Operation(
       operationId = "maximizeCoupon",
       summary =
+<<<<<<< HEAD
           "Maximize the use of a coupon so the client can buy the largest possible quantity of products.")
   @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK")})
+=======
+          "Maximize the use of a coupon for a customer to purchase the largest quantity of items.")
+  @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK.")})
+>>>>>>> 6ee41ee4d297022b8f2180bb7533f45c627dbbad
   @PostMapping({"coupon"})
   ResponseEntity<MaximizedTotalToSpendDto> maximizeCouponBenefit(
       @RequestBody @Valid FavouritesClientItemsWithCouponDto request) throws BusinessException {
-    MaximizedTotalToSpend maximizedTotalToSpent =
-        maximizeCouponUseService.maximize(request.getItemsIds(), request.getAmount());
 
+    // Calling service.
+    MaximizedTotalToSpend maximizedTotalToSpent =
+        maximizeCouponUseService.maximize(request.itemsIds(), request.amount());
+
+    // returning maximized coupon.
     return ResponseEntity.ok(
         new MaximizedTotalToSpendDto(
             maximizedTotalToSpent.getItemsIds(), maximizedTotalToSpent.getTotal()));
   }
 
+  // --------------------------------------------------------------------------------------------------------- //
+
   @Operation(operationId = "topProducts", summary = "Obtains a list of the most redeemed products.")
   @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK")})
-  @GetMapping("best-redeemed-products")
-  ResponseEntity<List<BestRedeemedProductsDto>> getTopSoldProducts() {
+  @GetMapping("most-redeemed-products")
+  ResponseEntity<List<BestRedeemedProductsDto>> getTopSellingProducts() {
 
     List<BestRedeemedProductsDto> bestSellingDto = new ArrayList<>();
 
+    // Calling service
     List<BestRedeemedProducts> bestSellingProducts = bestSellingService.getTopSellingProducts();
 
+    // TODO Use mapstruct
     for (BestRedeemedProducts b : bestSellingProducts) {
       bestSellingDto.add(new BestRedeemedProductsDto(b.getProductName(), b.getQuantity()));
     }

@@ -12,7 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProductsSalesEntity {
 
-  // TODO Dejar bien documentado nivel entidad.
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
