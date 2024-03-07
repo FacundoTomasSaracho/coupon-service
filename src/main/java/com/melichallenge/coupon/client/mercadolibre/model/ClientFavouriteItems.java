@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Item {
+public class ClientFavouriteItems {
     private Integer code;
     @JsonProperty("body")
     private ItemBody itemBody;

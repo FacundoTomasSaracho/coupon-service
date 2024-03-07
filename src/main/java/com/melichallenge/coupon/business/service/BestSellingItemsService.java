@@ -4,7 +4,7 @@ import com.melichallenge.coupon.model.BestRedeemedProducts;
 
 import java.util.List;
 
-public interface BestSellingService {
+public interface BestSellingItemsService {
 
     List<BestRedeemedProducts> getTopSellingProducts();
 

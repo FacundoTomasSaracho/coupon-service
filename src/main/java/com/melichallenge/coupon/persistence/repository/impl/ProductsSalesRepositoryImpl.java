@@ -21,6 +21,10 @@ public class ProductsSalesRepositoryImpl implements ProductsSalesRepository {
   public List<BestRedeemedProducts> getBestSellingProducts() {
 
     List<BestRedeemedProducts> bestSellingProducts = new ArrayList<>();
+
+    // TODO Handle PersistenceException
+    // Finding top 5 in DB.
+    log.info("Getting best selling products in DB.");
     List<ProductsSalesEntity> topSales = productSalesDao.findTop5SellingProducts();
 
     // TODO use mapstruct.
@@ -39,7 +43,6 @@ public class ProductsSalesRepositoryImpl implements ProductsSalesRepository {
 
   private List<ProductsSalesEntity> map(List<String> itemsIds) {
     List<ProductsSalesEntity> productsSalesEntities = new ArrayList<>();
-    int cont = 0;
     for (String s : itemsIds) {
       productsSalesEntities.add(new ProductsSalesEntity(s, 1L));
     }

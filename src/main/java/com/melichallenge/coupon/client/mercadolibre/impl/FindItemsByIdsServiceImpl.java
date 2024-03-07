@@ -1,7 +1,7 @@
 package com.melichallenge.coupon.client.mercadolibre.impl;
 
 import com.melichallenge.coupon.client.mercadolibre.FindItemsByIdsService;
-import com.melichallenge.coupon.client.mercadolibre.model.Item;
+import com.melichallenge.coupon.client.mercadolibre.model.ClientFavouriteItems;
 import com.melichallenge.coupon.exception.BusinessException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -24,16 +24,18 @@ public class FindItemsByIdsServiceImpl implements FindItemsByIdsService {
   @Value("${attributes}")
   private String attributes;
 
-  public List<Item> findItems(List<String> ids) throws BusinessException {
+  public List<ClientFavouriteItems> findItems(List<String> ids) throws BusinessException {
 
-    //// TODO Modify. If an error occurs, it will be handled directly in the RestExceptionHandler.
+    // TODO Improve | If an error occurs, it will be handled directly in the RestExceptionHandler.
+    // I should have the MeLi error structure.
+    log.info("Calling MeLi API");
     try {
       return restTemplate
           .exchange(
               formEndpoint(ids),
               HttpMethod.GET,
               null,
-              new ParameterizedTypeReference<List<Item>>() {})
+              new ParameterizedTypeReference<List<ClientFavouriteItems>>() {})
           .getBody();
 
     } catch (Exception e) {
