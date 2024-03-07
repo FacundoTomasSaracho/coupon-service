@@ -26,7 +26,7 @@ public class FindItemsByIdsServiceImpl implements FindItemsByIdsService {
 
   public List<ClientFavouriteItems> findItems(List<String> ids) throws BusinessException {
 
-    // TODO Improve | If an error occurs, it will be handled directly in the RestExceptionHandler.
+    // TODO Improve | If an error occurs, it will be handled directly in the RestExceptionHandler
     // I should have the MeLi error structure.
     log.info("Calling MeLi API");
     try {
