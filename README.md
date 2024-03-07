@@ -5,7 +5,8 @@ Este microservicio contiene dos operaciones que permiten maximizar el uso de un 
 ## Uso y documentación
 
 • Documentación swagger: 
-https://coupon-service.azurewebsites.net/promotions/v1/swagger-ui/index.html#/
+https://coupon-service.azurewebsites.net/promotions/v1/swagger-ui/index.html#/  
+
 • Ver [Postman](./tests/coupon-service-postmancollection.json).  
 
 ## Servicio
