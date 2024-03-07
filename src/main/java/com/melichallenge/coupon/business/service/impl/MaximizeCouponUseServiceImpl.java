@@ -44,6 +44,21 @@ public class MaximizeCouponUseServiceImpl implements MaximizeCouponUseService {
     return maximizedTotalToSpend;
   }
 
+<<<<<<< HEAD
+  private MaximizedTotalToSpend maximizePurchase(List<Item> items, double amount) {
+    Set<String> purchasedItemIds = new HashSet<>();
+    double totalSpentAmount = 0.0;
+
+    sortItemsByPrice(items);
+
+    for (Item item : items) {
+      if (canPurchaseItem(totalSpentAmount, item, amount)) {
+        purchaseItem(purchasedItemIds, item);
+        totalSpentAmount += item.getItemBody().getPrice();
+      }
+    }
+    return new MaximizedTotalToSpend(new ArrayList<>(purchasedItemIds), totalSpentAmount);
+=======
   private MaximizedTotalToSpend maximizeCouponUsage(
       List<ClientFavouriteItems> clientFavouriteItems, Integer amount) {
 
@@ -73,5 +88,29 @@ public class MaximizeCouponUseServiceImpl implements MaximizeCouponUseService {
 
   private void saveItem(List<String> filteredClientFavouriteItems, ClientFavouriteItems item) {
     filteredClientFavouriteItems.add(item.getItemBody().getItemId());
+>>>>>>> 6ee41ee4d297022b8f2180bb7533f45c627dbbad
   }
+
+  private void sortItemsByPrice(List<Item> items) {
+    items.sort(Comparator.comparingDouble(item -> item.getItemBody().getPrice()));
+  }
+
+  private boolean canPurchaseItem(double totalSpentAmount, Item item, double maxAmount) {
+    return totalSpentAmount + item.getItemBody().getPrice() <= maxAmount;
+  }
+
+  private void purchaseItem(Set<String> purchasedItemIds, Item item) {
+    purchasedItemIds.add(item.getItemBody().getItemId());
+  }
+
+  //  private boolean canAffordIt(double spentAmount, List<Item> items) {
+  //    Set<String> filteredItems = new HashSet<>();
+  //    for (Item item : items) {
+  //      if (spentAmount + item.getItemBody().getPrice() <= amount) { // if client can buy it or
+  // not.
+  //        filteredItems.add(item.getItemBody().getItemId());
+  //        spentAmount += item.getItemBody().getPrice();
+  //      }
+  //    }
+  //  }
 }
