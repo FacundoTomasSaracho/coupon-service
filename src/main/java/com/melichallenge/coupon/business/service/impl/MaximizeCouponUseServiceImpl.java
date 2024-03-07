@@ -6,9 +6,7 @@ import com.melichallenge.coupon.client.mercadolibre.model.Item;
 import com.melichallenge.coupon.exception.BusinessException;
 import com.melichallenge.coupon.model.MaximizedTotalToSpend;
 import com.melichallenge.coupon.persistence.repository.ProductsSalesRepository;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -36,22 +34,41 @@ public class MaximizeCouponUseServiceImpl implements MaximizeCouponUseService {
     return maximizedTotalToSpend;
   }
 
-  private MaximizedTotalToSpend maximizePurchase(List<Item> items, Integer amount) {
-    double spentAmount = 0.0;
+  private MaximizedTotalToSpend maximizePurchase(List<Item> items, double amount) {
+    Set<String> purchasedItemIds = new HashSet<>();
+    double totalSpentAmount = 0.0;
 
-    List<String> filteredItems = new ArrayList<>();
-
-    // cheapest to most expensive.
-    items.sort(Comparator.comparingDouble(item -> item.getItemBody().getPrice()));
+    sortItemsByPrice(items);
 
     for (Item item : items) {
-      if (spentAmount + item.getItemBody().getPrice() <= amount) { // if client can buy it or not.
-        filteredItems.add(item.getItemBody().getItemId());
-        spentAmount += item.getItemBody().getPrice();
-      } else {
-        break; // if client cant buy anything else breaks.
+      if (canPurchaseItem(totalSpentAmount, item, amount)) {
+        purchaseItem(purchasedItemIds, item);
+        totalSpentAmount += item.getItemBody().getPrice();
       }
     }
-    return new MaximizedTotalToSpend(filteredItems, spentAmount);
+    return new MaximizedTotalToSpend(new ArrayList<>(purchasedItemIds), totalSpentAmount);
   }
+
+  private void sortItemsByPrice(List<Item> items) {
+    items.sort(Comparator.comparingDouble(item -> item.getItemBody().getPrice()));
+  }
+
+  private boolean canPurchaseItem(double totalSpentAmount, Item item, double maxAmount) {
+    return totalSpentAmount + item.getItemBody().getPrice() <= maxAmount;
+  }
+
+  private void purchaseItem(Set<String> purchasedItemIds, Item item) {
+    purchasedItemIds.add(item.getItemBody().getItemId());
+  }
+
+  //  private boolean canAffordIt(double spentAmount, List<Item> items) {
+  //    Set<String> filteredItems = new HashSet<>();
+  //    for (Item item : items) {
+  //      if (spentAmount + item.getItemBody().getPrice() <= amount) { // if client can buy it or
+  // not.
+  //        filteredItems.add(item.getItemBody().getItemId());
+  //        spentAmount += item.getItemBody().getPrice();
+  //      }
+  //    }
+  //  }
 }
