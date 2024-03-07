@@ -23,7 +23,7 @@ public class MaximizeCouponUseServiceImpl implements MaximizeCouponUseService {
 
   public MaximizedTotalToSpend maximize(List<String> ids, Integer amount) throws BusinessException {
 
-    // No repeated ids.
+    // No repeated ids
     Set<String> noRepeatedIds = new HashSet<>(ids);
 
     // Request to MeLi API
@@ -45,18 +45,18 @@ public class MaximizeCouponUseServiceImpl implements MaximizeCouponUseService {
   }
 
   private MaximizedTotalToSpend maximizeCouponUsage(
-      List<ClientFavouriteItems> items, Integer amount) {
+      List<ClientFavouriteItems> clientFavouriteItems, Integer amount) {
 
     double totalSpentAmount = 0.0;
     List<String> filteredClientFavouriteItems = new ArrayList<>();
 
     // Order asc.
-    sortItemsByPrice(items);
+    sortItemsByPrice(clientFavouriteItems);
 
-    for (ClientFavouriteItems clientFavouriteItems : items) {
-      if (canAddItem(totalSpentAmount, clientFavouriteItems, amount)) { // if client can buy it.
-        saveItem(filteredClientFavouriteItems, clientFavouriteItems);
-        totalSpentAmount += clientFavouriteItems.getItemBody().getPrice();
+    for (ClientFavouriteItems items : clientFavouriteItems) {
+      if (canAddItem(totalSpentAmount, items, amount)) { // if client can buy it.
+        saveItem(filteredClientFavouriteItems, items);
+        totalSpentAmount += items.getItemBody().getPrice();
       }
     }
     return new MaximizedTotalToSpend(

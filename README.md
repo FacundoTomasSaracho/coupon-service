@@ -2,14 +2,16 @@
 
 Este microservicio contiene dos operaciones que permiten maximizar el uso de un cupón de descuento y obtener el top 5 de productos que se han canjeado a partir de la operación mencionada anteriormente.
 
-Documentación swagger: 
+## Uso y documentación
+
+• Ver [Request](./tests/coupon-service-postmancollection.json).  
+• Documentación swagger: 
 https://coupon-service.azurewebsites.net/promotions/v1/swagger-ui/index.html#/
 
 ## Servicio
 
 **Título del Producto:** Coupon Service  
-**Version:** 1.0.0    
-**Security:** not implemented  
+**Version:** 1.0.0     
 **BasePath:** /promotions/v1  
 
 ## Métodos expuestos
@@ -35,6 +37,8 @@ Clouds: Azure (microservicio desplegado mediante github) y AWS (BBDDRR).
 MySQL Workbench (levanté una instancia en AWS que me permite persistir lo pedido en nivel 2).
 
 Swagger (OpenApi)
+
+
 
 ## Autor  
   Desarrollado por **Facundo Tomás Saracho**  

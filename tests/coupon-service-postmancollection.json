@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "4428d90c-ef6c-4d77-8571-2f03d7827973",
+		"name": "Coupon-Service-Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12956260"
+	},
+	"item": [
+		{
+			"name": "/coupon",
+			"item": [
+				{
+					"name": "200 OK",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"items_ids\": [\r\n        \"MLA1520547502\",\r\n        \"MLA1520547502\",\r\n        \"MLA1520547502\",\r\n        \"MLA1520547502\",\r\n        \"MLA901188385\",\r\n        \"MLA869973285\",\r\n        \"MLA1385440257\",\r\n        \"asdasddassda\"\r\n    ],\r\n    \"amount\": 150000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "coupon-service.azurewebsites.net/promotions/v1/coupon",
+							"host": [
+								"coupon-service",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"promotions",
+								"v1",
+								"coupon"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "most-selling-products",
+			"item": [
+				{
+					"name": "200 OK",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "coupon-service.azurewebsites.net/promotions/v1/most-redeemed-products",
+							"host": [
+								"coupon-service",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"promotions",
+								"v1",
+								"most-redeemed-products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
