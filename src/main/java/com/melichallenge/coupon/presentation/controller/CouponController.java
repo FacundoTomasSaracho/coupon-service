@@ -34,7 +34,7 @@ public class CouponController {
 
   @Operation(
       operationId = "maximizeCoupon",
-      summary = "Maximize the use a client can give to a discount coupon.")
+      summary = "Maximize the use a client can give to a discount coupon")
   @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK")})
   @PostMapping({"coupon"})
   ResponseEntity<MaximizedTotalToSpendDto> maximizeCouponBenefit(
