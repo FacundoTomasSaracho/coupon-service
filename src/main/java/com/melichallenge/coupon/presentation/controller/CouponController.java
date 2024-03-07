@@ -9,6 +9,8 @@ import com.melichallenge.coupon.presentation.dto.BestRedeemedProductsDto;
 import com.melichallenge.coupon.presentation.dto.FavouritesClientItemsWithCouponDto;
 import com.melichallenge.coupon.presentation.dto.MaximizedTotalToSpendDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,6 +38,7 @@ public class CouponController {
       operationId = "maximizeCoupon",
       summary = "Maximize the use a client can give to a discount coupon")
   @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK")})
+  @ArraySchema(schema = @Schema(implementation = MaximizedTotalToSpendDto.class))
   @PostMapping({"coupon"})
   ResponseEntity<MaximizedTotalToSpendDto> maximizeCouponBenefit(
       @RequestBody @Valid FavouritesClientItemsWithCouponDto request) throws BusinessException {
@@ -54,6 +57,7 @@ public class CouponController {
 
   @Operation(operationId = "topProducts", summary = "Obtains a list of the most redeemed products.")
   @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK")})
+  @ArraySchema(schema = @Schema(implementation = BestRedeemedProductsDto.class))
   @GetMapping("most-redeemed-products")
   ResponseEntity<List<BestRedeemedProductsDto>> getTopSellingProducts() {
 
