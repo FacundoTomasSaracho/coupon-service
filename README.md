@@ -9,6 +9,10 @@ https://coupon-service.azurewebsites.net/promotions/v1/swagger-ui/index.html#/
 
 • Ver [Postman](./tests/coupon-service-postmancollection.json).  
 
+Se puede probar el microservicio directamente desde el swagger. Existe una instancia levantada en AWS de la base de datos y en Azure está desplegado el microservicio.
+Se puede probar mediante postman (ver collection)
+Se puede probar levantando el código, usando el JDK 17 y Maven en su versión 3.9.1.
+
 ## Servicio
 
 **Título del Producto:** Coupon Service  
