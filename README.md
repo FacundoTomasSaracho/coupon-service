@@ -7,7 +7,7 @@ Este microservicio contiene dos operaciones que permiten maximizar el uso de un 
 • Documentación swagger: 
 https://coupon-service.azurewebsites.net/promotions/v1/swagger-ui/index.html#/  
 
-• Ver [Postman](./tests/coupon-service-postmancollection.json).  
+• Ver [Collection](./tests/coupon-service-postmancollection.json).  
 
 Se puede probar el microservicio directamente desde el swagger. Existe una instancia levantada en AWS de la base de datos y en Azure está desplegado el microservicio.
 
