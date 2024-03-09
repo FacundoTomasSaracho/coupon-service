@@ -1,9 +1,8 @@
 package com.melichallenge.coupon.presentation.controller;
 
-import com.melichallenge.coupon.business.service.BestSellingItemsService;
+import com.melichallenge.coupon.business.service.BestRedeemedProductsService;
 import com.melichallenge.coupon.business.service.MaximizeCouponUseService;
 import com.melichallenge.coupon.exception.BusinessException;
-import com.melichallenge.coupon.model.BestRedeemedProducts;
 import com.melichallenge.coupon.model.MaximizedTotalToSpend;
 import com.melichallenge.coupon.presentation.dto.BestRedeemedProductsDto;
 import com.melichallenge.coupon.presentation.dto.FavouritesClientItemsWithCouponDto;
@@ -15,7 +14,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CouponController {
 
   private final MaximizeCouponUseService maximizeCouponUseService;
-  private final BestSellingItemsService bestSellingService;
+  private final BestRedeemedProductsService bestRedeemedProductsService;
 
   @Operation(
       operationId = "maximizeCoupon",
@@ -59,17 +57,15 @@ public class CouponController {
   @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "OK")})
   @ArraySchema(schema = @Schema(implementation = BestRedeemedProductsDto.class))
   @GetMapping("most-redeemed-products")
-  ResponseEntity<List<BestRedeemedProductsDto>> getTopSellingProducts() {
+  ResponseEntity<List<BestRedeemedProductsDto>> findTopRedeemedProducts() {
 
-    List<BestRedeemedProductsDto> bestSellingDto = new ArrayList<>();
-
-    // Calling service
-    List<BestRedeemedProducts> bestSellingProducts = bestSellingService.getTopSellingProducts();
-
-    // TODO Use mapstruct
-    for (BestRedeemedProducts b : bestSellingProducts) {
-      bestSellingDto.add(new BestRedeemedProductsDto(b.getProductName(), b.getQuantity()));
-    }
-    return ResponseEntity.ok(bestSellingDto);
+    // TODO Use mapstruct mb.
+    return ResponseEntity.ok(
+        bestRedeemedProductsService.findTopRedeemedProducts().stream() // Calling Service
+            .map(
+                b ->
+                    new BestRedeemedProductsDto(
+                        b.getProductName(), b.getQuantity())) // Mapping to DTO.
+            .toList());
   }
 }

@@ -1,6 +1,6 @@
 package com.melichallenge.coupon.business.service.impl;
 
-import com.melichallenge.coupon.business.service.BestSellingItemsService;
+import com.melichallenge.coupon.business.service.BestRedeemedProductsService;
 import com.melichallenge.coupon.model.BestRedeemedProducts;
 import com.melichallenge.coupon.persistence.repository.ProductsSalesRepository;
 import java.util.List;
@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Log4j2
-public class BestSellingItemsServiceImpl implements BestSellingItemsService {
+public class BestRedeemedProductsServiceImpl implements BestRedeemedProductsService {
 
   private final ProductsSalesRepository productsSalesRepository;
 
   @Override
-  public List<BestRedeemedProducts> getTopSellingProducts() {
-    return productsSalesRepository.getBestSellingProducts();
+  public List<BestRedeemedProducts> findTopRedeemedProducts() {
+    return productsSalesRepository.findBestRedeemedProducts();
   }
 }

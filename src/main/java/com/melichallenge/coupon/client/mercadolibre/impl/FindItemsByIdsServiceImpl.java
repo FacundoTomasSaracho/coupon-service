@@ -1,7 +1,7 @@
 package com.melichallenge.coupon.client.mercadolibre.impl;
 
 import com.melichallenge.coupon.client.mercadolibre.FindItemsByIdsService;
-import com.melichallenge.coupon.client.mercadolibre.model.ClientFavouriteItems;
+import com.melichallenge.coupon.client.mercadolibre.model.ClientFavouriteProducts;
 import com.melichallenge.coupon.exception.BusinessException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -10,12 +10,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @RequiredArgsConstructor
 @Log4j2
 @Component
 public class FindItemsByIdsServiceImpl implements FindItemsByIdsService {
+
   private final RestTemplate restTemplate;
 
   @Value("${meliEndpoint}")
@@ -24,7 +27,7 @@ public class FindItemsByIdsServiceImpl implements FindItemsByIdsService {
   @Value("${attributes}")
   private String attributes;
 
-  public List<ClientFavouriteItems> findItems(List<String> ids) throws BusinessException {
+  public List<ClientFavouriteProducts> findItems(List<String> ids) throws BusinessException {
 
     // TODO Improve | If an error occurs, it will be handled directly in the RestExceptionHandler
     // I should have the MeLi error structure.
@@ -35,11 +38,11 @@ public class FindItemsByIdsServiceImpl implements FindItemsByIdsService {
               formEndpoint(ids),
               HttpMethod.GET,
               null,
-              new ParameterizedTypeReference<List<ClientFavouriteItems>>() {})
+              new ParameterizedTypeReference<List<ClientFavouriteProducts>>() {})
           .getBody();
 
-    } catch (Exception e) {
-      log.error("Exception: {}", e.getMessage());
+    } catch (HttpClientErrorException | HttpServerErrorException exception) {
+      log.error("Exception: {}", exception.getMessage());
       throw new BusinessException(400, "Bad Request");
     }
   }

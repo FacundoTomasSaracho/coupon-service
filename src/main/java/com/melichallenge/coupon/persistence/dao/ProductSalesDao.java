@@ -16,5 +16,5 @@ public interface ProductSalesDao extends JpaRepository<ProductsSalesEntity, Long
           + "GROUP BY p.productName "
           + "ORDER BY SUM(p.quantity) DESC "
           + "LIMIT 5")
-  List<ProductsSalesEntity> findTop5SellingProducts();
+  List<ProductsSalesEntity> findTopFiveRedeemedProducts();
 }

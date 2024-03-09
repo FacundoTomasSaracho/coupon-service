@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ProductsSalesRepository {
 
-  List<BestRedeemedProducts> getBestSellingProducts();
+  List<BestRedeemedProducts> findBestRedeemedProducts();
 
-  void saveSellings(List<String> itemIds);
+  void saveProductIdAndQuantity(List<String> itemIds);
 }
