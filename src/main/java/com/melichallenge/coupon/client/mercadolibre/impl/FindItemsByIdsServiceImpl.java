@@ -1,11 +1,11 @@
 package com.melichallenge.coupon.client.mercadolibre.impl;
 
+import static com.melichallenge.coupon.exception.enums.ResponseCode.BAD_REQUEST;
+
 import com.melichallenge.coupon.client.mercadolibre.FindItemsByIdsService;
 import com.melichallenge.coupon.client.mercadolibre.model.ClientFavouriteProducts;
 import com.melichallenge.coupon.exception.BusinessException;
 import java.util.List;
-
-import com.melichallenge.coupon.exception.enums.ResponseCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,8 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
-
-import static com.melichallenge.coupon.exception.enums.ResponseCode.BAD_REQUEST;
 
 @RequiredArgsConstructor
 @Log4j2
