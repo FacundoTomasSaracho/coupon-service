@@ -35,7 +35,7 @@ public class MaximizeCouponUseServiceImpl implements MaximizeCouponUseService {
                                 .toList() //  that indicates the geographic zone.
                 );
 
-        //Remove null objects.
+        //Remove not found items.
         removeIfEmpty(clientFavouriteItems);
 
         // Maximizing coupon
@@ -81,6 +81,7 @@ public class MaximizeCouponUseServiceImpl implements MaximizeCouponUseService {
     }
 
     private void removeIfEmpty(List<ClientFavouriteProducts> clientFavouriteProducts) {
-        clientFavouriteProducts.removeIf(Objects::isNull);
+        clientFavouriteProducts
+                .removeIf(c -> c.getItemBody().getPrice() == null || c.getItemBody().getSiteId() == null);
     }
 }
