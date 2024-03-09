@@ -7,12 +7,11 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class RestTemplateConfiguration {
 
-    public RestTemplateConfiguration() {
+  public RestTemplateConfiguration() {}
 
-    }
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+  // Singleton because @Bean
+  @Bean
+  public RestTemplate restTemplate() {
+    return new RestTemplate();
+  }
 }

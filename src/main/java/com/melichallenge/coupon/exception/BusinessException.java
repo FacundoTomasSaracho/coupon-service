@@ -1,16 +1,20 @@
 package com.melichallenge.coupon.exception;
 
-import lombok.AllArgsConstructor;
+import com.melichallenge.coupon.exception.enums.ResponseCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class BusinessException extends Exception {
 
-    //TODO MeliClient & project should have their own error structure.
+  // TODO MeliClient & project should have their own error structure.
 
-    private Integer code;
-    private String message;
+  public BusinessException(ResponseCode responseCode) {
+    this.code = responseCode.getCode();
+    this.message = responseCode.getMessage();
+  }
+
+  private Integer code;
+  private String message;
 }
