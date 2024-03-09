@@ -46,7 +46,7 @@ public class FindItemsByIdsServiceImpl implements FindItemsByIdsService {
           .getBody();
 
     } catch (HttpClientErrorException | HttpServerErrorException exception) {
-      log.error("Exception: {}", exception.getMessage());
+      log.error("Exception: ", exception);
       throw new BusinessException(BAD_REQUEST);
     }
   }
