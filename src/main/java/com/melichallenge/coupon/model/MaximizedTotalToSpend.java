@@ -10,5 +10,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MaximizedTotalToSpend {
   private List<String> itemsIds;
-  private Double total;
+  private Double amount;
 }

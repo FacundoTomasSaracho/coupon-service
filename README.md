@@ -45,7 +45,5 @@ MySQL Workbench (levanté una instancia en AWS que me permite persistir lo pedid
 
 Swagger (OpenApi)
 
-
-
 ## Autor  
   Desarrollado por **Facundo Tomás Saracho**  
