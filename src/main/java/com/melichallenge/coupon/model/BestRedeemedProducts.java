@@ -10,5 +10,4 @@ import lombok.Setter;
 public class BestRedeemedProducts {
 
   private String productName;
-  private Long quantity;
 }

@@ -4,7 +4,7 @@ import com.melichallenge.coupon.business.service.MaximizeCouponUseService;
 import com.melichallenge.coupon.client.mercadolibre.FindItemsByIdsService;
 import com.melichallenge.coupon.client.mercadolibre.model.ClientFavouriteProducts;
 import com.melichallenge.coupon.model.MaximizedTotalToSpend;
-import com.melichallenge.coupon.persistence.repository.ProductsSalesRepository;
+import com.melichallenge.coupon.persistence.repository.service.ProductRepositoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.*;
 public class MaximizeCouponUseServiceImpl implements MaximizeCouponUseService {
 
     private final FindItemsByIdsService findItemsByIdsService;
-    private final ProductsSalesRepository productsSalesRepository;
+    private final ProductRepositoryService productRepositoryService;
 
     @Value("${siteId}")
     private String siteId;
@@ -41,7 +41,7 @@ public class MaximizeCouponUseServiceImpl implements MaximizeCouponUseService {
         MaximizedTotalToSpend maximizedTotalToSpend = maximizeCouponUsage(clientFavouriteItems, amount);
 
         // Saving in DB.
-        productsSalesRepository.saveProductIdAndQuantity(maximizedTotalToSpend.getItemsIds());
+        productRepositoryService.saveProduct(maximizedTotalToSpend.getItemsIds());
 
         // return
         return maximizedTotalToSpend;

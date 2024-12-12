@@ -12,20 +12,15 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProductsSalesEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(name = "product_name")
-  private String productName;
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    private ProductEntity product;
 
-  @Column(name = "quantity")
-  private Long quantity;
-
-  // TODO: Should exist a table that contains all the MLA products.
-
-  public ProductsSalesEntity(String productName, Long quantity) {
-    this.productName = productName;
-    this.quantity = quantity;
-  }
+    public ProductsSalesEntity(ProductEntity product) {
+        this.product = product;
+    }
 }

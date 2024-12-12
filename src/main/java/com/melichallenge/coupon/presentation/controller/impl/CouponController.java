@@ -31,7 +31,8 @@ public class CouponController implements CouponApi {
     }
 
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-    public record ItemsAndAmount(@NotEmpty List<String> itemsIds, @NotEmpty @Positive Double totalAmount) {
+    public record ItemsAndAmount(@NotEmpty List<String> itemsIds,
+                                 @NotEmpty @Positive Double totalAmount) {
     }
 
 }

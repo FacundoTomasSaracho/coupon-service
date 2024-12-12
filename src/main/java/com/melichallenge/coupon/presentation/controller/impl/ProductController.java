@@ -1,6 +1,6 @@
 package com.melichallenge.coupon.presentation.controller.impl;
 
-import com.melichallenge.coupon.business.service.BestRedeemedProductsService;
+import com.melichallenge.coupon.business.service.ProductService;
 import com.melichallenge.coupon.presentation.controller.ProductApi;
 import com.melichallenge.coupon.presentation.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController implements ProductApi {
 
-    private final BestRedeemedProductsService bestRedeemedProductsService;
+    private final ProductService bestRedeemedProductsService;
 
     @Override
     @GetMapping("most-redeemed-products")
